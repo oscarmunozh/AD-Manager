@@ -502,7 +502,7 @@ function Show-ADManagerAuditLog {
 
 function Show-MainMenu {
     [CmdletBinding()]
-    param([System.Management.Automation.PSCustomObject]$Context)
+    param([psobject]$Context)
     
     while ($true) {
         Write-Output "========================================="
@@ -513,7 +513,7 @@ function Show-MainMenu {
             Write-Output "   [!] WHATIF MODE ACTIVE - No changes applied"
         }
         
-        Write-Output " ── USER MANAGEMENT ──"
+        Write-Output " -- USER MANAGEMENT --"
         Write-Output "  1. Bulk import users from CSV"
         Write-Output "  2. Create single user manually"
         Write-Output "  3. Search user"
@@ -522,18 +522,18 @@ function Show-MainMenu {
         Write-Output "  6. Move user to another OU"
         Write-Output "  7. Delete user permanently"
         Write-Output " "
-        Write-Output " ── GROUP MANAGEMENT ──"
+        Write-Output " -- GROUP MANAGEMENT --"
         Write-Output "  8. Bulk import groups from CSV"
         Write-Output "  9. Add / Remove user from group"
         Write-Output "  10. List all members of a group"
         Write-Output "  11. Delete group"
         Write-Output " "
-        Write-Output " ── ORGANIZATIONAL UNITS ──"
+        Write-Output " -- ORGANIZATIONAL UNITS --"
         Write-Output "  12. Bulk import OUs from CSV"
         Write-Output "  13. List all OUs and their users"
         Write-Output "  14. Delete OU with safety check"
         Write-Output " "
-        Write-Output " ── REPORTS & EXPORT ──"
+        Write-Output " -- REPORTS & EXPORT --"
         Write-Output "  15. Export full user list to CSV"
         Write-Output "  16. Export last search result to CSV"
         Write-Output "  17. Show audit log"
