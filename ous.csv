@@ -1,6 +1,0 @@
-Name,Path,Description
-"Users","DC=contoso,DC=com","Standard Corporate Users"
-"Groups","DC=contoso,DC=com","Security and Distribution Groups"
-"Computers","DC=contoso,DC=com","Corporate Workstations and Laptops"
-"Servers","DC=contoso,DC=com","Infrastructure Servers"
-"ServiceAccounts","DC=contoso,DC=com","Service and Automated Accounts"
