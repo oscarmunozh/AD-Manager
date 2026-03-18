@@ -1,0 +1,11 @@
+Name,SamAccountName,GivenName,Surname,Path,EmailAddress,Department,OfficePhone
+"Alice Smith",asmith,Alice,Smith,"OU=Users,DC=contoso,DC=com",asmith@contoso.com,HR,555-0101
+"Bob Johnson",bjohnson,Bob,Johnson,"OU=Users,DC=contoso,DC=com",bjohnson@contoso.com,IT,555-0102
+"Charlie Williams",cwilliams,Charlie,Williams,"OU=Users,DC=contoso,DC=com",cwilliams@contoso.com,Sales,555-0103
+"Diana Brown",dbrown,Diana,Brown,"OU=Users,DC=contoso,DC=com",dbrown@contoso.com,Finance,555-0104
+"Evan Davis",edavis,Evan,Davis,"OU=Users,DC=contoso,DC=com",edavis@contoso.com,Management,555-0105
+"Fiona Miller",fmiller,Fiona,Miller,"OU=Users,DC=contoso,DC=com",fmiller@contoso.com,Support,555-0106
+"George Wilson",gwilson,George,Wilson,"OU=Users,DC=contoso,DC=com",gwilson@contoso.com,IT,555-0107
+"Hannah Moore",hmoore,Hannah,Moore,"OU=Users,DC=contoso,DC=com",hmoore@contoso.com,Sales,555-0108
+"Ian Taylor",itaylor,Ian,Taylor,"OU=Users,DC=contoso,DC=com",itaylor@contoso.com,Finance,555-0109
+"Jessica Anderson",janderson,Jessica,Anderson,"OU=Users,DC=contoso,DC=com",janderson@contoso.com,HR,555-0110

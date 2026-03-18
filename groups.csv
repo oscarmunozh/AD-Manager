@@ -1,0 +1,7 @@
+Name,GroupCategory,GroupScope,Path,Description
+"IT Admins",Security,Global,"OU=Groups,DC=contoso,DC=com","Information Technology Administrators"
+"Sales Team",Security,Global,"OU=Groups,DC=contoso,DC=com","Global Sales Representatives"
+"HR Department",Security,Global,"OU=Groups,DC=contoso,DC=com","Human Resources Personnel"
+"Finance Auditors",Security,Global,"OU=Groups,DC=contoso,DC=com","Finance and Accounting Team"
+"Executive Management",Security,Global,"OU=Groups,DC=contoso,DC=com","C-Level and Directors"
+"Support Staff",Security,Global,"OU=Groups,DC=contoso,DC=com","Customer Support Representatives"
