@@ -1,23 +1,19 @@
 # AD Manager — PowerShell Active Directory Management Tool
 
-<div align="center">
+[![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-0078D4?style=for-the-badge&logo=powershell&logoColor=white)](https://github.com/PowerShell/PowerShell)
+[![Windows](https://img.shields.io/badge/Windows-Server%202016%2B-0078D4?style=for-the-badge&logo=windows&logoColor=white)]()
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)]()
+[![Status](https://img.shields.io/badge/Status-Simulation%20Ready-yellow?style=for-the-badge)]()
 
-![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-0078D4?style=for-the-badge&logo=powershell&logoColor=white)
-![Windows](https://img.shields.io/badge/Windows-Server%202016%2B-0078D4?style=for-the-badge&logo=windows&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Simulation%20Ready-yellow?style=for-the-badge)
-
-**An enterprise-grade interactive PowerShell tool for managing Active Directory users, groups, and organizational units.**
-
-Bulk operations · WhatIf simulation · Audit logging · CSV import/export
-
-</div>
+Interactive PowerShell tool for managing Active Directory users, groups, and OUs. 17-option menu, `-WhatIf` simulation mode, audit logging, and bulk CSV operations.
 
 ---
 
-## Overview
+## Why I built this
 
-AD Manager is a fully interactive PowerShell script built for systems administrators who need a fast, reliable, and safe way to manage Active Directory objects. It features a structured menu with 17 options, a complete audit trail, and a built-in simulation mode (`-WhatIf`) that lets you test every action without touching production.
+During my ASIR degree I spent a lot of time working with Windows Server and Active Directory. Managing things through `dsa.msc` gets slow fast — creating 20 users or reorganizing OUs from the GUI is tedious work that shouldn't require clicking through menus.
+
+I built AD Manager to practice automating those tasks properly with PowerShell: a single script that covers the most common AD operations, logs everything it does, and has a `-WhatIf` mode so you can safely rehearse before touching a real environment.
 
 > All Active Directory cmdlets are included as comments. The script runs in simulation mode out of the box — no AD module required to test it.
 
@@ -50,17 +46,20 @@ AD Manager is a fully interactive PowerShell script built for systems administra
 
 ## Getting Started
 
-### Run in simulation mode
+### Run in simulation mode (no AD needed)
+
 ```powershell
 .\AD_Manager.ps1
 ```
 
 ### Run with WhatIf — no changes will be applied
+
 ```powershell
 .\AD_Manager.ps1 -WhatIf
 ```
 
 ### Custom log file name
+
 ```powershell
 .\AD_Manager.ps1 -LogFileName "MyAudit.log"
 ```
@@ -69,9 +68,7 @@ AD Manager is a fully interactive PowerShell script built for systems administra
 
 ## WhatIf Mode
 
-WhatIf mode lets you rehearse every action safely before touching a real environment.
-
-When active, a warning banner appears on every menu load:
+WhatIf mode lets you rehearse every action safely before touching a real environment. When active, a warning banner appears on every menu load:
 
 ```
 [!] WHATIF MODE ACTIVE - No changes applied
@@ -83,25 +80,15 @@ Instead of executing, every modifying action outputs:
 What if: Performing the operation "Delete User" on target "AD User: asmith"
 ```
 
-**Actions covered by WhatIf** (no changes made):
-- Creating, moving and deleting users
-- Enabling and disabling accounts
-- Resetting passwords
-- Bulk importing users, groups and OUs
-- Deleting groups and OUs
-- Exporting data
+**Covered by WhatIf** (no changes made): creating, moving and deleting users · enabling and disabling accounts · resetting passwords · bulk importing users, groups and OUs · deleting groups and OUs · exporting data
 
-**Actions not affected** (always read-only):
-- Searching users
-- Listing group members
-- Listing OUs
-- Viewing the audit log
+**Not affected** (always read-only): searching users · listing group members · listing OUs · viewing the audit log
 
 > Always run `-WhatIf` first when deploying in a new environment.
 
 ---
 
-## Menu Options
+## Menu
 
 ```
 =========================================
@@ -141,6 +128,7 @@ What if: Performing the operation "Delete User" on target "AD User: asmith"
 ## CSV Format
 
 ### users.csv
+
 ```csv
 Name,SamAccountName,GivenName,Surname,Path,EmailAddress,Department,OfficePhone
 "Alice Smith",asmith,Alice,Smith,"OU=Users,DC=contoso,DC=com",asmith@contoso.com,IT,555-0101
@@ -158,36 +146,26 @@ Name,SamAccountName,GivenName,Surname,Path,EmailAddress,Department,OfficePhone
 | OfficePhone | Office phone number |
 
 ### groups.csv
+
 ```csv
 Name,GroupCategory,GroupScope,Path,Description
 "IT Admins",Security,Global,"OU=Groups,DC=contoso,DC=com","Information Technology Administrators"
 ```
 
-| Column | Description |
-|---|---|
-| Name | Group display name |
-| GroupCategory | Security or Distribution |
-| GroupScope | Global / Universal / DomainLocal |
-| Path | OU distinguished name |
-| Description | Group description |
-
 ### ous.csv
+
 ```csv
 Name,Path,Description
 "Users","DC=contoso,DC=com","Standard Corporate Users"
 ```
 
-| Column | Description |
-|---|---|
-| Name | OU name |
-| Path | Parent distinguished name |
-| Description | OU description |
+The `sample-data/` folder includes ready-to-use examples: 10 users, 6 groups, and 5 OUs.
 
 ---
 
 ## Audit Log
 
-Every action is automatically written to `AD_Manager.log` in the script directory.
+Every action is automatically written to `AD_Manager.log` in the script directory:
 
 ```
 [2026-03-18T10:23:01Z] | Mode: REAL   | Action: Bulk Import User | Target: asmith    | Result: Success
@@ -213,34 +191,34 @@ AD-Manager/
 
 ---
 
-## Security Notes
-
-- Passwords are generated via `System.Web.Security.Membership.GeneratePassword` and handled exclusively as `SecureString` — never logged or displayed in plain text.
-- The script detects administrator privileges at startup and warns if not elevated.
-- Deleting an OU triggers an explicit safety warning due to the recursive nature of the operation.
-
----
-
 ## Using in a Live AD Environment
 
-To execute real Active Directory operations:
-
 1. Install the AD PowerShell module:
+
 ```powershell
 Install-WindowsFeature -Name RSAT-AD-PowerShell
 ```
+
 2. Run the script on a domain-joined machine.
 3. Test with `-WhatIf` first.
 4. Uncomment the AD cmdlet lines inside each function.
 
 ---
 
+## Security Notes
+
+- Passwords are generated via `System.Web.Security.Membership.GeneratePassword` and handled as `SecureString` — never logged or displayed in plain text.
+- The script detects administrator privileges at startup and warns if not elevated.
+- Deleting an OU triggers an explicit safety warning due to the recursive nature of the operation.
+
+---
+
 ## Disclaimer
 
-This script is intended for educational and simulation purposes. Always validate in a test environment before running against a production Active Directory infrastructure.
+This script is intended for learning and simulation purposes. Always validate in a test environment before running against a production Active Directory infrastructure.
 
 ---
 
 ## License
 
-MIT License — free to use, modify and distribute.
+MIT — free to use, modify and distribute.
